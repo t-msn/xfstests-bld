@@ -135,6 +135,7 @@ setup_repo xfstests-dev		XFSTESTS_GIT	XFSTESTS_COMMIT		true
 setup_repo keyutils		KEYUTILS_GIT	KEYUTILS_COMMIT		false
 setup_repo stress-ng		STRESS_NG_GIT	STRESS_NG_COMMIT	false
 setup_repo util-linux		UTIL_LINUX_GIT	UTIL_LINUX_COMMIT	false
+setup_repo btrfs-progs		BTRFSPROGS_GIT	BTRFSPROGS_COMMIT	false
 setup_repo go/src/github.com/google/syzkaller SYZKALLER_GIT SYZKALLER_COMMIT false
 
 # Make sure acl doesn't try regenerate these files because of the

@@ -59,12 +59,14 @@ function set_skip_all () {
     SKIP_STRESS_NG=yes
     SKIP_UTIL_LINUX=yes
     SKIP_SYZKALLER=yes
+    SKIP_BTRFSPROGS=yes
 }
 
 # Optional components
 [ -d keyutils ] || SKIP_KEYUTILS=yes
 [ -d stress-ng ] || SKIP_STRESS_NG=yes
 [ -d util-linux ] || SKIP_UTIL_LINUX=yes
+[ -d btrfs-progs ] || SKIP_BTRFSPROGS=yes
 [ -d go/src/github.com/google/syzkaller ] || SKIP_SYZKALLER=yes
 
 MAKE_CLEAN=":"
@@ -133,6 +135,10 @@ while [ "$1" != "" ]; do
 	    set_skip_all
 	    unset SKIP_XFSTESTS
 	    ;;
+	--btrfs-progs-only)
+	    set_skip_all
+	    unset SKIP_BTRFSPROGS
+	    ;;
 	--kvm-utils-only)
 	    set_skip_all
 	    unset SKIP_KVM_UTILS
@@ -171,6 +177,19 @@ export SOURCE_DATE_EPOCH=$(git log -1 --pretty=%ct)
 export BUILD_PATH_PREFIX_MAP="xfstests-bld=$(pwd)"
 # GCC doesn't yet understand BUILD_PATH_PREFIX_MAP
 LCF="$LCF -fdebug-prefix-map=$(pwd)=xfstests-bld -gno-record-gcc-switches"
+
+if test -z "$SKIP_BTRFSPROGS" ; then
+    build_start "btrfs-progs"
+    (cd btrfs-progs ;
+     export CFLAGS="$LCF -I$DESTDIR/include" ;
+     export LDFLAGS="$LLF $EXEC_LDFLAGS -L$DESTDIR/lib" ;
+     ver=$(git describe --always --dirty);
+		 echo "btrfs-progs	$ver ($(git log -1 --pretty=%cD))" > ../btrfs-progs.ver ;
+     ./autogen.sh;
+     ./configure $cross --prefix=/ --disable-documentation;
+     $MAKE_CLEAN ; make all; make $J DESTDIR=$DESTDIR install;
+    )
+fi
 
 if test -z "$SKIP_E2FSLIBS" ; then
     build_start "e2fslibs"

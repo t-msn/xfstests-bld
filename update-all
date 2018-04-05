@@ -34,6 +34,9 @@ rm $DESTDIR/lib/libaio.so*
     DIST_ROOT=$DESTDIR make $J install; \
     DIST_ROOT=$DESTDIR make $J install-dev)
 
+(cd btrfs-progs; \
+		make all; make $J prefix=/ DESTDIR=$DESTDIR install)
+
 find . -name \*.la | xargs rm -f      # Die, libtool, die!!!!
 
 (cd fio; \
@@ -50,6 +53,7 @@ find . -name \*.la | xargs rm -f      # Die, libtool, die!!!!
 (cd xfsprogs-dev; ver=$(git describe --always --dirty); echo "xfsprogs	$ver ($(git log -1 --pretty=%cD))" > ../xfsprogs.ver )
 (cd fio; ver=$(git describe --always --dirty); echo "fio		$ver ($(git log -1 --pretty=%cD))" > ../fio.ver )
 (cd xfstests-dev; ver=$(git describe --always --dirty); echo "xfstests	$ver ($(git log -1 --pretty=%cD))" > ../xfstests.ver )
+(cd btrfs-progs; ver=$(git describe --always --dirty); echo "btrfsprogs	$ver ($(git log -1 --pretty=%cD))" > ../btrfs-progs.ver )
 (cd quota; ver=$(git describe --always --dirty); echo "quota		$ver ($(git log -1 --pretty=%cD))" > ../quota.ver )
 
 

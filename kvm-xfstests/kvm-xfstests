@@ -134,6 +134,12 @@ $NO_ACTION $IONICE $QEMU -boot order=c $NET \
 	-drive file=$VDF,cache=$CACHE,if=virtio,format=raw$AIO \
 	-drive file=$VDG,cache=none,if=virtio,format=raw$AIO \
 	-drive file=$VDH,if=virtio,format=raw \
+	-drive file=$VDI,cache=$CACHE,if=virtio,format=raw$AIO \
+	-drive file=$VDJ,cache=$CACHE,if=virtio,format=raw$AIO \
+	-drive file=$VDK,cache=$CACHE,if=virtio,format=raw$AIO \
+	-drive file=$VDL,cache=$CACHE,if=virtio,format=raw$AIO \
+	-drive file=$VDM,cache=$CACHE,if=virtio,format=raw$AIO \
+	-drive file=$VDN,cache=$CACHE,if=virtio,format=raw$AIO \
 	-vga none -nographic -smp $NR_CPU -m $MEM \
 	$VIRTFS \
 	$VIRTIO_RNG \

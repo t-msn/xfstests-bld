@@ -129,7 +129,7 @@ while [ "$1" != "" ]; do
 done
 
 umount "$PRI_TST_DEV" >& /dev/null
-umount "$SM_TST_DEV" >& /dev/null
+# umount "$SM_TST_DEV" >& /dev/null
 if ! get_fs_config $FSTESTTYP ; then
     echo "Unsupported primary file system type $FSTESTTYP"
     exit 1
@@ -295,13 +295,11 @@ do
 	# 	fi
 	# 	;;
 	# esac
-
-	### ad hoc solution
 	export TEST_DIR=/vdb
 	export TEST_DEV=/dev/vdi
 	export SCRATCH_MNT=/vdc
 	export SCRATCH_DEV_POOL="/dev/vdj /dev/vdk /dev/vdl /dev/vdm /dev/vdn"
-	echo TEST_DIR: $TEST_DIR, $TEST_DEV, $SCRATCH_MNT, $SCRATCH_DEV
+	echo TEST_DIR: $TEST_DIR, $TEST_DEV, $SCRATCH_MNT, $SCRATCH_DEV_POOL
 
 	if test -n "$ALL_FSX_AVOID"
 	then

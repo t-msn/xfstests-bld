@@ -88,6 +88,7 @@ MAKELOG
 /xfsprogs-dev/
 /xfstests-dev/
 /xfstests/
+/btrfs-progs/
 /go/
 /misc/fname_benchmark
 /misc/resize

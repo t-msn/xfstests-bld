@@ -9,6 +9,7 @@ REPOS =		fio \
 		util-linux \
 		xfsprogs-dev \
 		xfstests-dev \
+		btrfs-progs \
 		go/src/github.com/google/syzkaller
 
 SUBDIRS =	acl \
